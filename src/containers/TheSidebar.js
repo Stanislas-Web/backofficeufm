@@ -1,0 +1,51 @@
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import logo from "../assets/icons/ufm-removebg-preview.png";
+import {
+  CCreateElement,
+  CSidebar,
+  CSidebarBrand,
+  CSidebarNav,
+  CSidebarNavDivider,
+  CSidebarNavTitle,
+  CSidebarMinimizer,
+  CSidebarNavDropdown,
+  CSidebarNavItem,
+} from "@coreui/react";
+
+import CIcon from "@coreui/icons-react";
+
+// sidebar nav config
+import navigation from "./_nav";
+
+const TheSidebar = () => {
+  const dispatch = useDispatch();
+  const show = useSelector((state) => state.sidebarShow);
+
+  return (
+    <CSidebar
+    style={{backgroundColor:"#F2E307"}}
+      show={show}
+      onShowChange={(val) => dispatch({ type: "set", sidebarShow: val })}
+    >
+      <CSidebarBrand className="d-md-down-none" style={{textDecoration:"none"}} to="/">
+        <div className="c-sidebar-brand-full" style={{fontWeight:"300", fontSize:"13px"}}><img src={logo} width="50px" height="30px"/> Urbain FM 94.7 </div>
+      </CSidebarBrand>
+
+      <CSidebarNav>
+        <CCreateElement
+          items={navigation}
+          components={{
+            CSidebarNavDivider,
+            CSidebarNavDropdown,
+            CSidebarNavItem,
+            CSidebarNavTitle,
+          }}
+        />
+      </CSidebarNav>
+      <CSidebarMinimizer className="c-d-md-down-none" />
+    </CSidebar>
+  );
+};
+
+export default React.memo(TheSidebar);
