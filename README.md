@@ -5,10 +5,10 @@ Ceci est le **Back Office de la plateforme cartographie des violences basées su
 
 ```bash
 # cloner le dépôt
-git clone https://github.com/Kinshasa-Digital-Academy-Dev/cartographie-vs-2.git
+git clone https://github.com/Kinshasa-Digital-Academy-Dev/backofficeufm.git
 
 # aller dans le répertoire de l'application
-$ cd my-project/back-office
+$ cd back-office
 
 # installer les dépendances de l'application 
 $ npm install 
@@ -24,4 +24,4 @@ Par default l'application utilise le port 3001.
 
 
 ## **Copyright**
-copyright 2020 [Kinshasa Digital Academy](https://www.kinshasadigital.com/academy)
+copyright 2020 [Kinshasa Digital Academy](https://www.kinshasadigital.academy)
