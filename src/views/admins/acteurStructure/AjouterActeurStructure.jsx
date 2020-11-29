@@ -234,91 +234,59 @@ handleSubmit = e => {
     return(
         <>
         
-          <h1>Formulaire d'insertion d'acteur et structure</h1>
+          <h1>Ajouter un Podcast</h1>
         <div className="container_form">
         <Form onSubmit={this.handleSubmit}>
+
+
         <Row>
-          <Col>
-          <Form.Label>Nom</Form.Label>
-            <Form.Control placeholder="Francine" type="text"onChange={this.changementNom} />
-            <span>{this.state.errorNom}</span>
-          </Col>
-          <Col>
+        <Col>
           <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label>Type</Form.Label>
+                  <Form.Label>Nom Emission</Form.Label>
                   <Form.Control as="select" onChange={this.changementType} >
-                    <option>Abris sur</option>
+                    <option>U matinale</option>
                     <option>Hopital</option>
                   </Form.Control>
                   <span>{this.state.errorType}</span>
                 </Form.Group>
           </Col>
+          <Col>
+          <Form.Label>Durée (minutes)</Form.Label>
+            <Form.Control placeholder="Ex: 30" type="number"onChange={this.changementNom} />
+            <span>{this.state.errorNom}</span>
+          </Col>
+
         </Row>
+
+        <br/>
+
         <Row>
-    <Col>
-    <Form.Label>Telephone</Form.Label>
-      <Form.Control placeholder="+243898989897" type="text" onChange={this.changementTelephone} />
-      <span>{this.state.errorTelephone}</span>
+        <Col>
+          <Form.Label for="fileAudio" className="labelFile" >Choisir un fichier Audio Mp3</Form.Label>
+            <Form.Control id="fileAudio" className="file" placeholder="First name" type="file" onChange={this.changementImage} />
+            < span>{this.state.errorImage}</span>
     </Col>
     <Col>
-    <Form.Label>whatsapp</Form.Label>
-      <Form.Control placeholder="+243898989898" type="text" onChange={this.changementWhatsapp} />
-      <span>{this.state.errorWhatsapp}</span>
-    </Col>
-  </Row>
-  <Row>
-  <Col>
-    <Form.Label>Email</Form.Label>
-      <Form.Control placeholder="Jino21@gmail.com" type="text" onChange={this.changementEmail} />
-      <span>{this.state.errorEmail}</span>
-    </Col>
-    <Col>
-    <Form.Group controlId="exampleForm.ControlSelect1">
-            <Form.Label>Province</Form.Label>
-            <Form.Control as="select" onChange={this.changementProvince} >
-    { this.state.provinces.map(province => <option key={province._id} value={province._id}>{province.nom}</option>)}
-            </Form.Control>
-          </Form.Group>
-    </Col>
-  </Row>
-  <Row>
-  <Col>
-    <Form.Group controlId="exampleForm.ControlSelect1">
-            <Form.Label>Description</Form.Label>
-            <Form.Control as="textarea" onChange={this.changementDescription} >
-            </Form.Control>
-          </Form.Group>
-          <span>{this.state.errorDescription}</span>
-    </Col>
-  </Row>
-  <Row>
-    <Col>
-    <Form.Group controlId="exampleForm.ControlSelect1">
-            <Form.Label>Itineraire</Form.Label>
-            <Form.Control as="textarea" onChange={this.changementItineraire}>
-            </Form.Control>
-          </Form.Group>
-          <span>{this.state.errorItineraire}</span>
-    </Col>
-    <Col>
-    <Form.Label>Image</Form.Label>
-      <Form.Control placeholder="First name" type="file" onChange={this.changementImage} />
+    <Form.Label className="labelFile" for="filePhotoPodcast">Choisir la photo du podcast</Form.Label>
+      <Form.Control placeholder="First name"  id="filePhotoPodcast" className="file"  type="file" onChange={this.changementImage} />
       <span>{this.state.errorImage}</span>
     </Col>
   </Row>
+      <br/>
   <Row>
-    <Col>
-    <Form.Label>latitude</Form.Label>
-      <Form.Control placeholder="-4° 19' 17 S" type="text" onChange={this.changementLatitude} />
-      <span>{this.state.errorLatitude}</span>
-    </Col>
-    <Col>
-    <Form.Label>longitude</Form.Label>
-      <Form.Control placeholder="15° 18' 29 E" type="text" onChange={this.changementLongitude} />
-      <span>{this.state.errorLongitude}</span>
-    </Col>
-  </Row>
-<br />
+        <Col>
+          <Form.Group controlId="exampleForm.ControlSelect1">
+                  <Form.Label>Description</Form.Label>
+                  <Form.Control as="textarea" onChange={this.changementDescription} >
+                  </Form.Control>
+                </Form.Group>
+                <span>{this.state.errorDescription}</span>
+          </Col>
+        </Row>
+  
+
+ 
+<br/>
     <Button type="submit" variant="primary" className="bouton_form" >Enregistrer</Button>
 </Form>
         </div>

@@ -11,16 +11,17 @@ const myStyle ={
 
 const TheFooter = () => {
   return (
-    <CFooter fixed={false} style={myStyle}>
-      <div style={{ marginLeft:"250px"}}>
-        <a href="https://www.kinshasadigital.com/academy" target="_blank" rel="noopener noreferrer">Cartographie VBG</a>
-        <span className="ml-1">&copy; 2020 .</span>
-      </div>
-      <div className="mfs-auto">
-        <span className="mr-1">Powered by</span>
-        <a href="https://www.kinshasadigital.com/academy" target="_blank" rel="noopener noreferrer">Kinshasa Digital Academy</a>
-      </div>
-    </CFooter>
+    <di></di>
+    // <CFooter fixed={false} >
+    //   {/* <div style={{ marginLeft:"250px"}}>
+    //     <a href="https://www.kinshasadigital.com/academy" target="_blank" rel="noopener noreferrer">Cartographie VBG</a>
+    //     <span className="ml-1">&copy; 2020 .</span>
+    //   </div>
+    //   <div className="mfs-auto">
+    //     <span className="mr-1">Powered by</span>
+    //     <a href="https://www.kinshasadigital.academy" target="_blank" rel="noopener noreferrer">Kinshasa Digital Academy</a>
+    //   </div> */}
+    // </CFooter>
   )
 }
 

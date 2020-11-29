@@ -193,81 +193,75 @@ handleSubmit = e => {
     return(
         <>
         
-          <h1>Formulaire d'insertions des VBG</h1>
+          <h1>Ajouter une Emission</h1>
         <div className="container_form">
         <Form onSubmit={this.handleSubmit}>
-  <Row>
-    <Col>
-    <Form.Group controlId="exampleForm.ControlSelect1">
-            <Form.Label>Type de violence</Form.Label>
-            <Form.Control as="select" onChange={this.changementType}>
-            <option value={this.state.type}>{this.state.type}</option>
-            { this.state.typeViolence.map(viol => <option key={viol} value={viol}>{viol}</option>)}
-            </Form.Control>
-            <span>{this.state.errorTypeViolence}</span>
-          </Form.Group>
-    </Col>
-    </Row>
-    <Row>
-    <Col>
-    <Form.Group controlId="exampleForm.ControlSelect1" onChange={this.changementSexe}>
-            <Form.Label>Sexe</Form.Label>
-            <Form.Control as="select">
-              <option value={this.state.sexe}>{this.state.sexe}</option>
-              <option  value="Feminin">Feminin</option>
-              <option value="Masculin">Masculin</option>
-            </Form.Control>
-            <span> {this.state.errorSexe} </span>
-          </Form.Group>
-    </Col>
-    </Row>
-    <Row>
-    <Col>
-    <Form.Group controlId="exampleForm.ControlSelect1">
-            <Form.Label>Tranche d'age du victime</Form.Label>
-            <Form.Control as="select" onChange={this.changementTrancheAge}>
-            { this.state.typeTrancheAge.map(tranche => <option key={tranche} value={tranche}>{tranche}</option>)}
-            </Form.Control>
-            <span> {this.state.errorTrancheAge} </span>
-          </Form.Group>
-    </Col>
-    </Row>
-    <Row>
-    <Col>
-    <Form.Group controlId="exampleForm.ControlSelect1">
-        <Form.Label>Auteur</Form.Label>
-        <Form.Control as="select" onChange={this.changementAuteur}>
-        { this.state.typeAuteur.map(auteur => <option key={auteur} value={auteur}>{auteur}</option>)}
-        </Form.Control>
-        <span> {this.state.errorAuteur} </span>
-      </Form.Group>
-    </Col>
-    </Row>
-    <Row>
-    <Col>
-    <Form.Label>Date du viole</Form.Label> <br/>
+
+
+
+        <Row>
+          <Col>
+          <Form.Label>Nom Emission</Form.Label>
+            <Form.Control placeholder="Ex : U Matinale" type="text"onChange={this.changementNom} />
+            <span>{this.state.errorNom}</span>
+          </Col>
+          <Col>
+          <Form.Label>Type Emission</Form.Label>
+            <Form.Control placeholder="Ex : Culture" type="text"onChange={this.changementNom} />
+            <span>{this.state.errorNom}</span>
+          </Col>
+        
+        </Row>
+        
+        <br/>
+        <Row>
+          <Col>
+          <Form.Label>Présenté par </Form.Label>
+            <Form.Control placeholder="Ex : Carine MUTAHAlI" type="text"onChange={this.changementNom} />
+            <span>{this.state.errorNom}</span>
+          </Col>
+        
+        </Row>
+
+        <br/>
+
+        <Row>
+          <Col>
+          <Form.Label>photo de l'emission</Form.Label>
+            <Form.Control placeholder="First name" type="file" onChange={this.changementImage} />
+            <span>{this.state.errorImage}</span>
+          </Col>
+          <Col>
+          <Form.Label>photo journaliste</Form.Label>
+            <Form.Control placeholder="First name" type="file" onChange={this.changementImage} />
+            <span>{this.state.errorImage}</span>
+          </Col>
+        </Row>
+
+        <br/>
+        <Row>
+        <Col>
+          <Form.Group controlId="exampleForm.ControlSelect1">
+                  <Form.Label>Description</Form.Label>
+                  <Form.Control as="textarea" onChange={this.changementDescription} >
+                  </Form.Control>
+                </Form.Group>
+                <span>{this.state.errorDescription}</span>
+          </Col>
+        </Row>
+
+
+
+
+
+
+ 
+
     
-    <DatePicker
-        selected={this.state.startDate}
-        onChange={this.handleChange}
-        dateFormat="yyyy-MM-dd"
-        className="date"
-      />
-      <span> {this.state.errorDate} </span>
-    </Col>
-    </Row>
-    <Row>
-    <Col>
-    <Form.Group controlId="exampleForm.ControlSelect1">
-    <Form.Label>Province</Form.Label>
-            <Form.Control as="select" onChange={this.changementProvince}>
-            <option value={this.state.prov._id} key={this.state.prov._id} selected disabled hidden> {this.state.prov.nom} </option>
-    { this.state.provinces.map(province => <option key={province._id} value={province._id}>{province.nom}</option>)}
-            </Form.Control>
-            <span> {this.state.errorProvince} </span>
-          </Form.Group>
-    </Col>
-    </Row>
+
+
+  
+  
     <Button type="submit" variant="primary" className="bouton_form" >Enregistrer</Button>
 </Form>
         

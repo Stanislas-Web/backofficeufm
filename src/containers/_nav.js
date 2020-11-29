@@ -89,12 +89,12 @@ const admin_nav = [
     to: "/admin/dashboard",
     icon: "cil-speedometer",
   },
-  {
-    _tag: "CSidebarNavItem",
-    name: "CasSoumisAdmin",
-    to: "/admin/casSoumisAdmin",
-    icon: "cil-bell",
-  },
+  // {
+  //   _tag: "CSidebarNavItem",
+  //   name: "CasSoumisAdmin",
+  //   to: "/admin/casSoumisAdmin",
+  //   icon: "cil-bell",
+  // },
 
   // {
   //   _tag: "CSidebarNavDropdown",
@@ -117,7 +117,7 @@ const admin_nav = [
 
   {
     _tag: "CSidebarNavDropdown",
-    name: "VBG",
+    name: "Emissions",
     to: "/theme/colors",
     icon: "cil-warning",
     _children: [
@@ -140,7 +140,7 @@ const admin_nav = [
   },
   {
     _tag: "CSidebarNavDropdown",
-    name: "Acteurs & Structures",
+    name: "Podcasts",
     to: "/theme/colors",
     icon: "cil-home",
     _children: [

@@ -24,7 +24,6 @@ const TheSidebar = () => {
 
   return (
     <CSidebar
-    style={{backgroundColor:"#F2E307"}}
       show={show}
       onShowChange={(val) => dispatch({ type: "set", sidebarShow: val })}
     >
