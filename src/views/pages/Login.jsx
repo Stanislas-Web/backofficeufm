@@ -36,34 +36,46 @@ class Login extends Component {
     e.preventDefault();    
     const user = {
       username:this.state.username,
-      password:this.state.pwd
+      password:this.state.pwd,
     }
 
-    Api.post(`/authentification`, user).then(res => {
-      localStorage.setItem("users", JSON.stringify( res.data));  
-       localStorage.setItem("token", res.data.token)
+    if(user.username == "ufm" && user.password == "94.7"){
+      localStorage.setItem("users", JSON.stringify(user));  
+      window.location.href = "#/admin/Dashboard";
+      window.location.reload();
+    }else{
+      this.setState({errorPassword: " Nom d'utilisateur ou Mot de passe Incorrecte"});
+    }
+
+
+
+    
+
+    // Api.post(`/authentification`, user).then(res => {
+    //   localStorage.setItem("users", JSON.stringify( res.data));  
+    //    localStorage.setItem("token", res.data.token)
        
-      if(res.data.user.role_user == "Admin"){
+    //   if(res.data.user.role_user == "Admin"){
        
-         window.location.href = "#/admin/Dashboard";
-         window.location.reload();
+    //      window.location.href = "#/admin/Dashboard";
+    //      window.location.reload();
           
-      }else if(res.data.user.role_user == "Admin_Structure"){
+    //   }else if(res.data.user.role_user == "Admin_Structure"){
         
-        this.props.history.push('/structure/Dashboard');
-        window.location.reload();
+    //     this.props.history.push('/structure/Dashboard');
+    //     window.location.reload();
          
-      }else if (res.data.user.role_user == "User_Structure"){
+    //   }else if (res.data.user.role_user == "User_Structure"){
        
-        this.props.history.push('/structure/Dashboard');
-        window.location.reload();
+    //     this.props.history.push('/structure/Dashboard');
+    //     window.location.reload();
          
-      }
-      }).catch((erreur)=> {
-          console.log(erreur.response.data);
-          this.setState({errorUsername: erreur.response.data.error});
-          this.setState({errorPassword: erreur.response.data.Error});
-        }) 
+    //   }
+    //   }).catch((erreur)=> {
+    //       console.log(erreur.response.data);
+    //       this.setState({errorUsername: erreur.response.data.error});
+    //       this.setState({errorPassword: erreur.response.data.Error});
+    //     }) 
   }
 myStyle={
   display:"flex",

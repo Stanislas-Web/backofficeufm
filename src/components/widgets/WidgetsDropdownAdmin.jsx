@@ -27,7 +27,7 @@ const WidgetsDropdownAdmin = () => {
         <CWidgetDropdown
           color="gradient-danger"
           header={dataStat.nbrTotalVbg}
-          text="Cas de VBG"
+          text="Emissions"
           footerSlot={
             <ChartBarSimple
               className="mt-3 mx-3"
@@ -52,7 +52,7 @@ const WidgetsDropdownAdmin = () => {
         <CWidgetDropdown
           color="gradient-warning"
           header={dataStat.nbrTotalCasSoumis}
-          text="Cas soumis"
+          text="Podcasts"
           footerSlot={
             <ChartLineSimple
               className="mt-3"
@@ -80,7 +80,7 @@ const WidgetsDropdownAdmin = () => {
         <CWidgetDropdown
           color="gradient-primary"
           header={dataStat.nbrTotalStructure}
-          text="Acteurs et Structures"
+          text="Bannières Publicitaires"
           footerSlot={
             <ChartLineSimple
               pointed

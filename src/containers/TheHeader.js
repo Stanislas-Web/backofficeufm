@@ -31,9 +31,9 @@ const TheHeader = () => {
     const users = JSON.parse(localStorage.getItem("users") || "[]");
 
     tab.push({
-          id:users.user._id,
-          nom:users.user.username,
-          role:users.user.role_user
+          // id:users.user._id,
+          nom:users.username,
+          role:users.role_user
     })
   }
 
@@ -117,7 +117,7 @@ const TheHeader = () => {
             <CLink 
               className="c-subheader-nav-link" 
               aria-current="page" 
-              to="/dashboard"
+              to="/admin/dashboard"
             >
               <CIcon name="cil-graph" alt="Dashboard" />&nbsp;Dashboard
             </CLink>

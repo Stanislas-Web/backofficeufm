@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SearchVBG from "../../../containers/searchCassoumis";
+import {Card, ListGroup, ListGroupItem, img, Body} from 'react-bootstrap';
  
 
 toast.configure();
@@ -153,19 +154,34 @@ function ListerActeurStructure() {
         }
       ];
     return (
-        <div className="table1">
-        <SearchVBG recherche={recherche} placehold="recherche par type..."/>
-        <DataTable
-        title="Liste des VBG"
-        columns={columns}
-        data={recherche?FiltreVBG:VBG}
-        pagination={true}
-        defaultSortField="label"
-        theme="boostrap"
-        defaultSortField="type"
-        button={true}
-      />
-      </div>
+      <Card style={{ width: '18rem' }}>
+  <Card.Img variant="top" src="https://scontent-lhr8-1.xx.fbcdn.net/v/t1.0-9/34581718_178191849493975_6454192594313281536_o.jpg?_nc_cat=104&ccb=2&_nc_sid=09cbfe&_nc_eui2=AeH6HESkirCzh3TcMH9bc_wMh1znLTuDX5WHXOctO4Nflcbx42eI2GyhHo4t8VNRYKTJE3HlwZsnWa2vtq42P6Wk&_nc_ohc=pBFClWZ60FoAX_5wsT-&_nc_ht=scontent-lhr8-1.xx&oh=c2d2b8a4b3516a1f0ba28be71f1e0efc&oe=5FE9105F" />
+  <Card.Body>
+    <Card.Title>Card Title</Card.Title>
+    <Card.Text>
+      Some quick example text to build on the card title and make up the bulk of
+      the card's content.
+    </Card.Text>
+  </Card.Body>
+
+  <Card.Body>
+    <Card.Link href="#">Modifier</Card.Link>
+    <Card.Link href="#">Supprimer</Card.Link>
+  </Card.Body>
+</Card>
+      //   <div className="table1">
+      //   <SearchVBG recherche={recherche} placehold="recherche par type..."/>
+      //   <DataTable
+      //   title="Liste des VBG"
+      //   columns={columns}
+      //   data={recherche?FiltreVBG:VBG}
+      //   pagination={true}
+      //   defaultSortField="label"
+      //   theme="boostrap"
+      //   defaultSortField="type"
+      //   button={true}
+      // />
+      // </div>
     )
   };
 

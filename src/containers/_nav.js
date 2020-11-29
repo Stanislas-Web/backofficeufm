@@ -124,18 +124,19 @@ const admin_nav = [
       {
         _tag: "CSidebarNavItem",
         name: "Ajouter",
-        to: "/admin/acteurStructure/AjouterVBG/ajout",
+        // to: "/admin/acteurStructure/AjouterVBG/ajout",
+        to: "/admin/ajouteremission",
       },
       {
         _tag: "CSidebarNavItem",
         name: "Lister",
-        to: "/admin/acteurStructure/ListerVbg",
+        to: "/admin/listeremission",
       },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Rapport",
-        to: "/admin/vbg/monitoring",
-      },
+      // {
+      //   _tag: "CSidebarNavItem",
+      //   name: "Rapport",
+      //   to: "/admin/vbg/monitoring",
+      // },
     ],
   },
   {
@@ -147,12 +148,12 @@ const admin_nav = [
       {
         _tag: "CSidebarNavItem",
         name: "Ajouter",
-        to: "/admin/acteurStructure/AjouterActeurStructure",
+        to: "/admin/ajouterpodcast",
       },
       {
         _tag: "CSidebarNavItem",
         name: "Lister",
-        to: "/admin/acteurStructure/ListerActeurStructure",
+        to: "/admin/listerpodcast",
       },
     ],
   },
@@ -178,22 +179,24 @@ const admin_nav = [
 
 
 let role;
+let menu = [];
+menu =   admin_nav
 
-  if (localStorage.getItem("users") === null) {
-    window.location.href = "#/login";
-  } else {
-     const users = JSON.parse(localStorage.getItem("users") ||  "[]");
-      role =  users.user.role_user;
-  }
+//   if (localStorage.getItem("users") === null) {
+//     window.location.href = "#/login";
+//   } else {
+//      const users = JSON.parse(localStorage.getItem("users") ||  "[]");
+//       role =  users.user.role_user;
+//   }
 
 
-let menu =  [];
+// let menu =  [];
 
-  if(role === "Admin"){
-    menu =   admin_nav
-  }else if(role === "Admin_Structure"){
-    menu =  structure_nav
-  }
+//   if(role === "Admin"){
+//     menu =   admin_nav
+//   }else if(role === "Admin_Structure"){
+//     menu =  structure_nav
+//   }
 
 
 

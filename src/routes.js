@@ -15,6 +15,12 @@ const ListerUtilisateurs = React.lazy(() => import('./views/admins/utilisateurs/
 const ModifierUtilisateur = React.lazy(() => import('./views/admins/utilisateurs/ModifierUtilisateur'));
 
 
+//ufm
+
+const AjouterEmission= React.lazy(() => import('./views/admins/emissions/ajouterEmission'));
+const ListerEmission= React.lazy(() => import('./views/admins/emissions/listerEmission'));
+const AjouterPodcast= React.lazy(() => import('./views/admins/podcasts/ajouterPodcast'));
+const ListerPodcast= React.lazy(() => import('./views/admins/podcasts/ListerPodcast'));
 
 
 
@@ -33,7 +39,14 @@ const ActeurModifierVBG = React.lazy(() => import('./views/structures/vbg/Acteur
 const routes = [
   { path: '/', exact: true, name: 'Home' },
 
+  //Admin Ufm
+  { path: '/admin/ajouteremission', name: 'Ajouter une Emission', component: AjouterEmission },
+  { path: '/admin/listeremission', name: 'Voir Les Emissions', component: ListerEmission },
+  { path: '/admin/ajouterpodcast', name: 'Ajouter un Podcast', component: AjouterPodcast },
+  { path: '/admin/listerpodcast', name: 'Voir Les Podcasts', component: ListerPodcast },
+
   //   Admin
+  
   { path: '/admin/Dashboard', name: 'Dashboard', component: AdminDashboard },
 
   { path: '/admin/vbg/listerVbg', name: 'ListeVbg', component: ListerVBG },
@@ -49,6 +62,7 @@ const routes = [
   { path: "/admin/acteurStructure/ListerUtilisateurs", name: 'ListerUtilisateurs', component: ListerUtilisateurs },
   { path: "/admin/acteurStructure/ModifierUtilisateur/:id", name: 'ModifierUtilisateur/:id', component: ModifierUtilisateur },
   { path: '/admin/CasSoumisAdmin', name: 'CasSoumisAdmin', component: CasSoumis },
+  
 
 
   // Acteurs et structures

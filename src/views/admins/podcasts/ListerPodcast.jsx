@@ -114,7 +114,7 @@ function ListerActeurStructure() {
     return (
       <div className>
         <DataTable
-        title="Liste des Acteurs et Structures d'accompagnement"
+        
         columns={columns}
         data={ActeurStructure}
         pagination={true}
