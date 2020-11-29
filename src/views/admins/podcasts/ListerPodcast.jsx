@@ -114,7 +114,6 @@ function ListerActeurStructure() {
     return (
       <div className>
         <DataTable
-        
         columns={columns}
         data={ActeurStructure}
         pagination={true}

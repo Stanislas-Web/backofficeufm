@@ -157,24 +157,24 @@ const admin_nav = [
       },
     ],
   },
-  {
-    _tag: "CSidebarNavDropdown",
-    name: "Utilisateurs",
-    to: "/theme/colors",
-    icon: "cil-userlogin",
-    _children: [
-      {
-        _tag: "CSidebarNavItem",
-        name: "Ajouter",
-        to: "/admin/acteurStructure/AjouterUtilsateur",
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Lister",
-        to: "/admin/acteurStructure/ListerUtilisateurs",
-      },
-    ],
-  },
+  // {
+  //   _tag: "CSidebarNavDropdown",
+  //   name: "Utilisateurs",
+  //   to: "/theme/colors",
+  //   icon: "cil-userlogin",
+  //   _children: [
+  //     {
+  //       _tag: "CSidebarNavItem",
+  //       name: "Ajouter",
+  //       to: "/admin/acteurStructure/AjouterUtilsateur",
+  //     },
+  //     {
+  //       _tag: "CSidebarNavItem",
+  //       name: "Lister",
+  //       to: "/admin/acteurStructure/ListerUtilisateurs",
+  //     },
+  //   ],
+  // },
 ];
 
 

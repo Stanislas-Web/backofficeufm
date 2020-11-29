@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SearchVBG from "../../../containers/searchCassoumis";
-import {Card, ListGroup, ListGroupItem, img, Body} from 'react-bootstrap';
+import {Card,Row, ListGroup, ListGroupItem, img, Body} from 'react-bootstrap';
+import '../../../scss/FormulaireAjouterActeur.scss';
  
 
 toast.configure();
@@ -13,6 +14,8 @@ const donne =[1]
 let element =0;
 
 function ListerActeurStructure() {
+
+    const [emissions, setEmissions] = useState([]);
   
     const [VBG, setVBG] = useState([]);
     const [FiltreVBG, setFiltreVBG] = useState([]);
@@ -22,32 +25,14 @@ function ListerActeurStructure() {
 
     useEffect(() => {
       console.log('USE EFFECT');
-      API.get('vbg').then((res) => {
-        res.data.map((item)=>{
-          donnees.push(
-            {
-              id: item._id,
-              province : item.province[0].nom,
-              dateViol : item.date.dateViol,
-              dateSoumition: item.date.dateSoumition,
-              type : item.type_violence,
-              auteurViol : item.auteur_viol,
-              trancheAgeVictime: item.tranche_age_victime,
-              sexeVictime : item.sexe_victime
-          }
-          )  
-        });
-        setVBG(donnees);
-        setFiltreVBG(donnees)
+      API.get('emissions').then((res) => {
+        setEmissions(res.data);
       }).catch((erreur)=> {
         console.log(erreur);
     });
       
     }, []);
 
-    // const handleClearRows = () => {
-    //   setToggledClearRows(!this.state.toggledClearRows)
-    // }
 
     function recherche (e){
     
@@ -154,13 +139,15 @@ function ListerActeurStructure() {
         }
       ];
     return (
-      <Card style={{ width: '18rem' }}>
-  <Card.Img variant="top" src="https://scontent-lhr8-1.xx.fbcdn.net/v/t1.0-9/34581718_178191849493975_6454192594313281536_o.jpg?_nc_cat=104&ccb=2&_nc_sid=09cbfe&_nc_eui2=AeH6HESkirCzh3TcMH9bc_wMh1znLTuDX5WHXOctO4Nflcbx42eI2GyhHo4t8VNRYKTJE3HlwZsnWa2vtq42P6Wk&_nc_ohc=pBFClWZ60FoAX_5wsT-&_nc_ht=scontent-lhr8-1.xx&oh=c2d2b8a4b3516a1f0ba28be71f1e0efc&oe=5FE9105F" />
+      <Row>
+      <div className="containerEmission">
+      
+      {emissions.map((emission)=>      <Card style={{ width: '18rem', margin:"10px" }}>
+  <Card.Img variant="top" src={emission.photo} />
   <Card.Body>
-    <Card.Title>Card Title</Card.Title>
+    <Card.Title>{emission.nom}</Card.Title>
     <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
+    {emission.description}
     </Card.Text>
   </Card.Body>
 
@@ -168,7 +155,10 @@ function ListerActeurStructure() {
     <Card.Link href="#">Modifier</Card.Link>
     <Card.Link href="#">Supprimer</Card.Link>
   </Card.Body>
-</Card>
+</Card>)}
+
+</div>
+</Row>
       //   <div className="table1">
       //   <SearchVBG recherche={recherche} placehold="recherche par type..."/>
       //   <DataTable
