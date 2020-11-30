@@ -84,7 +84,7 @@ const WidgetsDropdownAdmin = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-primary"
-          header="6"
+          header="8"
           text="Bannières Publicitaires"
           footerSlot={
             <ChartLineSimple
