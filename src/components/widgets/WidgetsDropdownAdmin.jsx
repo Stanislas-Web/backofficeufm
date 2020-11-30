@@ -14,10 +14,15 @@ import ChartLineSimple from "../charts/ChartLineSimple";
 import ChartBarSimple from "../charts/ChartBarSimple";
 
 const WidgetsDropdownAdmin = () => {
-  const [dataStat, setdataStat] = useState([]);
+  const [sumEmissions, setSumEmissions] = useState([]);
+  const [sumPodcasts, setSumPodcasts] = useState([]);
   useEffect(() => {
-    api.get("getGlobalStat").then((res) => {
-      setdataStat(res.data);
+    api.get("emissions").then((res) => {
+      setSumEmissions(res.data);
+    });
+
+    api.get("podcasts").then((res) => {
+      setSumPodcasts(res.data);
     });
   }, []);
   // render
@@ -26,7 +31,7 @@ const WidgetsDropdownAdmin = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-danger"
-          header={dataStat.nbrTotalVbg}
+          header={sumEmissions.length}
           text="Emissions"
           footerSlot={
             <ChartBarSimple
@@ -51,7 +56,7 @@ const WidgetsDropdownAdmin = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-warning"
-          header={dataStat.nbrTotalCasSoumis}
+          header={sumPodcasts.length}
           text="Podcasts"
           footerSlot={
             <ChartLineSimple
@@ -79,7 +84,7 @@ const WidgetsDropdownAdmin = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-primary"
-          header={dataStat.nbrTotalStructure}
+          header="6"
           text="Bannières Publicitaires"
           footerSlot={
             <ChartLineSimple
@@ -107,7 +112,7 @@ const WidgetsDropdownAdmin = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-info"
-          header={dataStat.nbrTotalUtilisateurs}
+          header="1"
           text="Utilisateurs"
           footerSlot={
             <ChartLineSimple
