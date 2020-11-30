@@ -41,16 +41,16 @@ class AjouterActeurStructure extends Component{
       const dat = this.props.match.params.id;
       console.log(dat);
       
-      if(!(dat.length<7)){
-        API.get('casSoumis/'+dat).then((res)=>{
-          console.log(res.data.provinces[0]._id)
-          this.setState({
-              type:res.data.type_viol,
-              province: res.data.provinces[0]._id,
-              sexe: res.data.sexe,
-          })
-      })
-      }
+      // if(!(dat.length<7)){
+      //   API.get('casSoumis/'+dat).then((res)=>{
+      //     console.log(res.data.provinces[0]._id)
+      //     this.setState({
+      //         type:res.data.type_viol,
+      //         province: res.data.provinces[0]._id,
+      //         sexe: res.data.sexe,
+      //     })
+      // })
+      // }
       
     API.get("provinces")
     .then(res=>{
@@ -262,7 +262,7 @@ handleSubmit = e => {
 
   
   
-    <Button type="submit" variant="primary" className="bouton_form" >Enregistrer</Button>
+    <Button type="submit" variant="primary" className="bouton_form" style={{backgroundColor:"#303C50",}} >Enregistrer</Button>
 </Form>
         
         </div>

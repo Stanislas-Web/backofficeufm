@@ -32,6 +32,30 @@ h1{
     background-color: rgb(93, 98, 168);
 }
 
+.file {
+    display: none;
+}
+.labelFile {
+    margin: auto;
+    padding: 10px;
+    background: #576680;
+    color : #ffffff;
+    border-radius: 5px;
+}
+.labelFile:hover{
+    cursor: pointer;
+}
+h1{
+    font-weight: 200;
+}
+.containerEmission{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    flex-wrap: wrap;   
+}
 
 // .container div{
 //     width: 50%;

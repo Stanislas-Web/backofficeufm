@@ -18,8 +18,9 @@ class ModifierActeurStructure extends Component{
         email:"",
         province:"",
         description:"",
+        typeTrancheAge:"",
         itineraire:"",
-        image:"",
+        image:"", 
         url: "",
         longitude:"",
         latitude:"",
@@ -36,22 +37,45 @@ class ModifierActeurStructure extends Component{
         errorImage:'',
         errorLatitude:'',
         errorLongitude:''
-    }
-    componentDidMount(){
-      
-      API.get("provinces")
-      .then(res=>{
-          this.setState({provinces : res.data})
-      })
-      console.log(this.state.provinces);
-      
         
     }
-   
-uploadImage = ()=>{
+    componentDidMount(){
+        
 
+        
+        const ID_STRUCTURE = this.props.match.params.id;
 
-  const data = new FormData()
+        API.get('acteurStructure/'+ID_STRUCTURE).then((res)=>{
+            this.setState({
+                nom:res.data.nom,
+                description: res.data.description,
+                whatsapp:res.data.contact.numerosWhatsapp,
+                telephone: res.data.contact.numerosTelephone,
+                email: res.data.contact.email,
+                // province: res.data.province[0]._id,
+                itineraire: res.data.adresse.itineraire,
+                // image:res.data.img,
+                type: res.data.type,
+                longitude: res.data.adresse.longitude,
+                latitude:res.data.adresse.latitude,
+            })
+            console.log(this.state.province);
+        })
+        
+        API.get("provinces")
+      .then(res=>{
+          this.setState({provinces : res.data});
+          this.setState({provinceUnique: res.data.map(p=>{
+            if(p._id==this.state.province){
+              this.setState({prov:p})
+            }
+          })})
+      })  
+        
+    }
+
+    uploadImage = ()=>{
+      const data = new FormData()
   data.append("file",this.state.image)
   data.append("upload_preset","Cartographie")
   data.append("cloud_name","dwgoa0xwn")
@@ -62,6 +86,8 @@ uploadImage = ()=>{
   }).then(res=> res.json())
   .then(data=>{
     this.setState({url: data.url})
+        console.log(this.state.image);
+        const ID_STRUCTURE_STRUCTURE = this.props.match.params.id;
     const NewActeur= {
       nom: this.state.nom,
       description: this.state.description,
@@ -81,38 +107,30 @@ uploadImage = ()=>{
         type: this.state.type,
     }
 
-    
-
-      console.log(this.state.image);
-      
       console.log(NewActeur);
+      
 
-    API.post("acteurStructure/", NewActeur)
+    API.put("acteurStructure/"+ID_STRUCTURE_STRUCTURE, NewActeur)
     .then(res => {
       console.log(res);
       console.log(res.data);
-      alert("Enregistrement reussi")
-      toast.success("enregistrement effectuer avec succes", toast.POSITION.TOP_RIGHT)
+      toast.success("Modification effectuer avec succes", toast.POSITION.TOP_RIGHT)
       this.props.history.push('/admin/acteurStructure/ListerActeurStructure');
       
     }).catch((erreur)=> {
       console.log(erreur);
-      
-      this.setState({errorMessage: erreur.message});
   });
-
     
-  }).catch(error=> {
-    console.log(error);
-  }
-  )
-}
-
-
+        
+      }).catch(error=> {
+        console.log(error);
+      }
+      )
+    }
 
 changementNom = e =>{
   this.setState({nom:e.target.value})
-  this.setState({errorNom: ""})
+  this.setState({errorNom:""})
 }
 
 changementType = e =>(this.setState({type:e.target.value}))
@@ -228,65 +246,100 @@ handleSubmit = e => {
     if(verificateur){
       this.uploadImage();
     }
+
+    
+    
+    
 }
 
   render(){
     return(
         <>
         
-          <h1>Ajouter un Podcast</h1>
+          <h1>Formulaire de modification d'acteur et structure</h1>
         <div className="container_form">
         <Form onSubmit={this.handleSubmit}>
-
-
         <Row>
-        <Col>
-          <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label>Nom Emission</Form.Label>
-                  <Form.Control as="select" onChange={this.changementType} >
-                    <option>U matinale</option>
-                    <option>Hopital</option>
-                  </Form.Control>
-                  <span>{this.state.errorType}</span>
-                </Form.Group>
-          </Col>
           <Col>
-          <Form.Label>Durée (minutes)</Form.Label>
-            <Form.Control placeholder="Ex: 30" type="number"onChange={this.changementNom} />
+          <Form.Label>Nom</Form.Label>
+            <Form.Control placeholder="Francine" type="text"onChange={this.changementNom} value={this.state.nom}/>
             <span>{this.state.errorNom}</span>
           </Col>
-
-        </Row>
-
-        <br/>
-
-        <Row>
-        <Col>
-          <Form.Label for="fileAudio" className="labelFile" >Choisir un fichier Audio Mp3</Form.Label>
-            <Form.Control id="fileAudio" className="file" placeholder="First name" type="file" onChange={this.changementImage} />
-            < span>{this.state.errorImage}</span>
-    </Col>
-    <Col>
-    <Form.Label className="labelFile" for="filePhotoPodcast">Choisir la photo du podcast</Form.Label>
-      <Form.Control placeholder="First name"  id="filePhotoPodcast" className="file"  type="file" onChange={this.changementImage} />
-      <span>{this.state.errorImage}</span>
-    </Col>
-  </Row>
-      <br/>
-  <Row>
-        <Col>
+          <Col>
           <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label>Description</Form.Label>
-                  <Form.Control as="textarea" onChange={this.changementDescription} >
+                  <Form.Label>Type</Form.Label>
+                  <Form.Control as="select" onChange={this.changementType} value={this.state.type}>
+                    <option>Abris sur</option>
+                    <option>Hopital</option>
                   </Form.Control>
                 </Form.Group>
-                <span>{this.state.errorDescription}</span>
           </Col>
         </Row>
-  
+        <Row>
+    <Col>
+    <Form.Label>Telephone</Form.Label>
+      <Form.Control placeholder="Last name" type="text" onChange={this.changementTelephone} value={this.state.telephone} />
+      <span>{this.state.errorTelephone}</span>
+    </Col>
+    <Col>
+    <Form.Label>whatsapp</Form.Label>
+      <Form.Control placeholder="First name" type="text" onChange={this.changementWhatsapp} value={this.state.whatsapp} />
+      <span>{this.state.errorWhatsapp}</span>
+    </Col>
+  </Row>
+  <Row>
+  <Col>
+    <Form.Label>Email</Form.Label>
+      <Form.Control placeholder="Jino21@gmail.com" type="text" onChange={this.changementEmail} value={this.state.email} />
+      <span>{this.state.errorEmail}</span>
+    </Col>
+    <Col>
+    <Form.Group controlId="exampleForm.ControlSelect1">
+            <Form.Label>Province</Form.Label>
+            <Form.Control as="select" onChange={this.changementProvince} >
+            <option value={this.state.prov._id} key={this.state.prov._id} selected disabled hidden> {this.state.prov.nom} </option>
+    { this.state.provinces.map(province => <option key={province._id} value={province._id}>{province.nom}</option>)}
+            </Form.Control>
+          </Form.Group>
+    </Col>
+  </Row>
+  <Row>
+  <Col>
+    <Form.Group controlId="exampleForm.ControlSelect1">
+            <Form.Label>Description</Form.Label>
+            <Form.Control as="textarea" onChange={this.changementDescription} value={this.state.description}>
+            </Form.Control>
+            <span>{this.state.errorDescription}</span>
+          </Form.Group>
+    </Col>
+  </Row>
+  <Row>
+    <Col>
+    <Form.Group controlId="exampleForm.ControlSelect1">
+            <Form.Label>Itineraire</Form.Label>
+            <Form.Control as="textarea" onChange={this.changementItineraire} value={this.state.itineraire}>
+            </Form.Control>
+            <span>{this.state.errorItineraire}</span>
+          </Form.Group>
+    </Col>
+    <Col>
+    <Form.Label>Image</Form.Label>
+      <Form.Control placeholder="First name" type="file" onChange={this.changementImage} />
+    </Col>
+  </Row>
+  <Row>
+    <Col>
+    <Form.Label>latitude</Form.Label>
+      <Form.Control placeholder="First name" type="text" onChange={this.changementLatitude} value={this.state.latitude} />
+      <span>{this.state.errorLatitude}</span>
+    </Col>
+    <Col>
+    <Form.Label>longitude</Form.Label>
+      <Form.Control placeholder="Last name" type="text" onChange={this.changementLongitude} value={this.state.longitude} />
+      <span>{this.state.errorLongitude}</span>
+    </Col>
+  </Row>
 
- 
-<br/>
     <Button type="submit" variant="primary" className="bouton_form" >Enregistrer</Button>
 </Form>
         </div>
