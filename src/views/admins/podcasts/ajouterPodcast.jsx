@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from 'axios';
+import {storage} from '../../../config/firebase';
 
 toast.configure();
 
@@ -38,68 +39,73 @@ class ModifierActeurStructure extends Component{
    
 uploadImage = ()=>{
 
+  const uploadTask = storage.ref(`images/${this.state.photo.name}`).put(this.state.photo);
+  uploadTask.on(
+    "state_changed",
+    snapshot => {},
+    error => {
+      console.log(error);
+    },
+    ()=>{
+      storage
+        .ref("images")
+        .child(this.state.photo.name)
+        .getDownloadURL()
+        .then(url => {
+          console.log(url);
+          this.setState({photo:url})
+        });
+    }
 
-  const data = new FormData()
-  data.append("file",this.state.photo)
-  // data.append("upload_preset","ufm")
-  // data.append("cloud_name","deb9kfhnx")
-  data.append("upload_preset","Cartographie")
-  data.append("cloud_name","dwgoa0xwn")
-  
-  // axios.post("https://api.cloudinary.com/v1_1/deb9kfhnx/image/upload",{data})
-
-
- fetch("https://api.cloudinary.com/v1_1/deb9kfhnx/image/upload",{
-    method: "post",
-    body:data
-  }).then(res=> res.json())
-  .then(data=>{
-    this.setState({photo: data.url})
-
-    // const NewActeur= {
-    //   nom: this.state.nom,
-    //   description: this.state.description,
-    //   province: this.state.province, 
-    //   img: this.state.url,
-    //   adresse:
-    //     {
-    //       itineraire: this.state.itineraire,
-    //       longitude: this.state.longitude,
-    //       latitude: this.state.latitude
-    //     },
-    //     contact:{
-    //       numerosTelephone: this.state.telephone,
-    //       numerosWhatsapp: this.state.whatsapp,
-    //       email: this.state.email
-    //     },
-    //     type: this.state.type,
-    // }
-
-    
-
-      console.log(this.state.photo);
-      
-      // console.log(NewActeur);
-
-  //   API.post("acteurStructure/", NewActeur)
-  //   .then(res => {
-  //     console.log(res);
-  //     console.log(res.data);
-  //     alert("Enregistrement reussi")
-  //     toast.success("enregistrement effectuer avec succes", toast.POSITION.TOP_RIGHT)
-  //     this.props.history.push('/admin/acteurStructure/ListerActeurStructure');
-      
-  //   }).catch((erreur)=> {
-  //     console.log(erreur);
-      
-  //     this.setState({errorMessage: erreur.message});
-  // });
-
-    
-  }).catch(error=> {
-    console.log(error);
-  }
   )
+
+  const uploadPodcast = storage.ref(`audios/${this.state.streamUrl.name}`).put(this.state.streamUrl);
+  uploadPodcast.on(
+    "state_changed",
+    snapshot => {},
+    error => {
+      console.log(error);
+    },
+    ()=>{
+      storage
+        .ref("audios")
+        .child(this.state.streamUrl.name)
+        .getDownloadURL()
+        .then(url => {
+          console.log(url);
+          this.setState({streamUrl:url})
+          const newPodcast = {
+            "nomEmission": this.state.nomEmission,
+            "streamUrl": this.state.streamUrl,
+            "photo": this.state.photo,
+            "description": this.state.description,
+          }
+        
+            API.post('https://us-central1-urbainfm-bd5e6.cloudfunctions.net/api/podcasts', newPodcast)
+            .then(res => {
+              console.log(res);
+              console.log(res.data);
+              toast.success("enregistrement effectuer avec succes", toast.POSITION.TOP_RIGHT)
+              this.props.history.push('/admin/listerpodcast');
+              
+            }).catch((erreur)=> {
+              console.log(erreur);
+              
+              this.setState({errorMessage: erreur.message});
+          });
+            
+        });
+
+
+    }
+
+  )
+
+
+
+
+
+
 }
 
 
@@ -110,11 +116,11 @@ changementNomEmission = e =>{
 }
 
 changementStreamUrl = e =>{
-  this.setState({streamUrl:e.target.value})
+  this.setState({streamUrl:e.target.files[0]})
   this.setState({errorStreamUrl: ""})
 }
 changementPhoto = e =>{
-  this.setState({photo:e.target.value})
+  this.setState({photo:e.target.files[0]})
   this.setState({errorPhoto: ""})
 }
 
@@ -131,7 +137,7 @@ changementDescription = e =>{
 
 handleSubmit = e => {
     e.preventDefault();
-    console.log("bonjour");
+    console.log(this.state.photo);
 
     let verificateur=true;
     
