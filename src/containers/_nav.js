@@ -157,6 +157,25 @@ const admin_nav = [
       },
     ],
   },
+
+  {
+    _tag: "CSidebarNavDropdown",
+    name: "Bannière Publicitaire",
+    to: "/theme/colors",
+    icon: "cil-home",
+    _children: [
+      {
+        _tag: "CSidebarNavItem",
+        name: "Ajouter",
+        to: "/admin/ajouterbanniere",
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: "Lister",
+        to: "/admin/listerbanniere",
+      },
+    ],
+  },
   // {
   //   _tag: "CSidebarNavDropdown",
   //   name: "Utilisateurs",

@@ -1,4 +1,5 @@
 import React from 'react';
+import ajouterImage from './views/admins/bannierepublicitaire/ajouterImage';
 // admin
 const AdminDashboard = React.lazy(() => import('./views/admins/Dashboard'));
 const ListerVBG= React.lazy(() => import('./views/admins/vbg/ListerVBG'));
@@ -21,6 +22,9 @@ const ListerEmission= React.lazy(() => import('./views/admins/emissions/listerEm
 const AjouterPodcast= React.lazy(() => import('./views/admins/podcasts/ajouterPodcast'));
 const ListerPodcast= React.lazy(() => import('./views/admins/podcasts/ListerPodcast'));
 const ModifierEmission = React.lazy(() => import('./views/admins/emissions/modifierEmission'));
+const AjouterBanniere= React.lazy(() => import('./views/admins/bannierepublicitaire/ajouterImage'));
+const ListerBanniere= React.lazy(() => import('./views/admins/bannierepublicitaire/listerImage'));
+
 
 
 
@@ -43,6 +47,8 @@ const routes = [
   { path: '/admin/listeremission', name: 'Voir Les Emissions', component: ListerEmission },
   { path: '/admin/ajouterpodcast', name: 'Ajouter un Podcast', component: AjouterPodcast },
   { path: '/admin/listerpodcast', name: 'Voir Les Podcasts', component: ListerPodcast },
+  { path: '/admin/ajouterbanniere', name: 'Ajouter une image publicitaire ', component: AjouterBanniere },
+  { path: '/admin/listerbanniere', name: 'Voir Les images publicitaires ', component: ListerBanniere },
 
   //   Admin
   
