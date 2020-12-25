@@ -71,8 +71,6 @@ handleChange = date => {
 
 
 uploadImage = ()=>{
-  toast.info("Veuillez patientez pendant que l'audio se télécharge", toast.POSITION.TOP_RIGHT)
-  // this.setState({visibility:true});
   const uploadTask = storage.ref(`images/${this.state.imageEmission.name}`).put(this.state.imageEmission);
   uploadTask.on(
     "state_changed",
@@ -88,11 +86,7 @@ uploadImage = ()=>{
         .then(url => {
           console.log(url);
           this.setState({imageEmission:url})
-        });
-    }
-
-  )
-
+              
   const imageJournaliste = storage.ref(`images/${this.state.imageJournaliste.name}`).put(this.state.imageJournaliste);
   imageJournaliste.on(
     "state_changed",
@@ -121,6 +115,7 @@ uploadImage = ()=>{
             .then(res => {
               console.log(res);
               console.log(res.data);
+              toast.info("Enregistrement effectuer", toast.POSITION.TOP_RIGHT);
               this.props.history.push('/admin/listeremission');
               window.location.reload();
               
@@ -137,10 +132,10 @@ uploadImage = ()=>{
 
   )
 
+        });
+    }
 
-
-
-
+  )
 
 }
 

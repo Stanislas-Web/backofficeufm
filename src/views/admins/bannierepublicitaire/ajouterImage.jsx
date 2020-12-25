@@ -71,8 +71,6 @@ handleChange = date => {
 
 
 uploadImage = ()=>{
-  toast.info("Veuillez patientez pendant que l'audio se télécharge", toast.POSITION.TOP_RIGHT)
-  // this.setState({visibility:true});
   const uploadTask = storage.ref(`images/${this.state.imageEmission.name}`).put(this.state.imageEmission);
   uploadTask.on(
     "state_changed",
@@ -122,6 +120,7 @@ uploadImage = ()=>{
               console.log(res);
               console.log(res.data);
               this.props.history.push('/admin/listeremission');
+              toast.info("Enregistrement effectuer ", toast.POSITION.TOP_RIGHT)
               window.location.reload();
               
             }).catch((erreur)=> {
