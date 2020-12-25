@@ -1,31 +1,19 @@
 export function formatCasSoumis(cas) {
   return cas.map((element) => {
     return {
-      id: element._id,
-      nom: element.nom,
-      age: element.age,
-      sexe: element.sexe,
-      numerosTelephone: element.numerosTelephone,
-      email: element.email,
-      acteurStructures_id: element.acteurStructures.id,
-      acteurStructures_nom: element.acteurStructures.nom,
-      provinces_id: element.provinces.id,
-      provinces_nom: element.provinces.nom,
-      dateSoumition: element.date,
+      id: element.id,
+      nom: element.nomEmission,
+      
+ 
     };
   });
 }
 export function formatVbg(vbg) {
   return vbg.map((element) => {
     return {
-      id: element._id,
-      type_violence: element.type_violence,
-      auteur_viol: element.auteur_viol,
-      tranche_age_victime: element.tranche_age_victime,
-      sexe_victime: element.sexe_victime,
-      province: element.province.nom,
-      dateViol: element.date.dateViol,
-      dateSoumition: element.date.dateSoumition,
+      id: element.id,
+      nom: element.nom,
+      description: element.description,
     };
   });
 }

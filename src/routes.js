@@ -8,7 +8,6 @@ const AjouterActeurStructure= React.lazy(() => import('./views/admins/acteurStru
 const AjouterVBG= React.lazy(() => import('./views/admins/vbg/AjouterVBG'));
 const Profile= React.lazy(() => import('./views/admins/acteurStructure/DetailStructure'));
 const ModifierActeurStructure = React.lazy(() => import('./views/admins/acteurStructure/ModifierActeurStructure'));
-const ModifierVbg = React.lazy(() => import('./views/admins/vbg/ModifierVbg'));
 const CasSoumis=React.lazy(() => import('./views/admins/CasSoumisAdmin'));
 const AjouterUtilisateur =React.lazy(() => import('./views/admins/utilisateurs/AjouterUtilistaeur'));
 const ListerUtilisateurs = React.lazy(() => import('./views/admins/utilisateurs/ListerUtilisteurs'));
@@ -21,7 +20,7 @@ const AjouterEmission= React.lazy(() => import('./views/admins/emissions/ajouter
 const ListerEmission= React.lazy(() => import('./views/admins/emissions/listerEmission'));
 const AjouterPodcast= React.lazy(() => import('./views/admins/podcasts/ajouterPodcast'));
 const ListerPodcast= React.lazy(() => import('./views/admins/podcasts/ListerPodcast'));
-
+const ModifierEmission = React.lazy(() => import('./views/admins/emissions/modifierEmission'));
 
 
 
@@ -57,7 +56,7 @@ const routes = [
   { path: '/admin/acteurStructure/AjouterVBG/:id', name: 'AjouterVBG/:id', component: AjouterVBG },
   { path: "/admin/acteurStructure/Detail/:id", name: 'Detail/:id', component: Profile },
   { path: "/admin/acteurStructure/modifierActeurStructure/:id", name: 'modifierActeurStructure/:id', component: ModifierActeurStructure },
-  { path: "/admin/acteurStructure/modifierVbg/:id", name: 'modifierVbg/:id', component: ModifierVbg },
+  { path: "/admin/modifieremission/:id", name: 'modifier Emissions/:id', component: ModifierEmission },
   { path: "/admin/acteurStructure/AjouterUtilsateur", name: 'AjouterUtilsateur', component: AjouterUtilisateur },
   { path: "/admin/acteurStructure/ListerUtilisateurs", name: 'ListerUtilisateurs', component: ListerUtilisateurs },
   { path: "/admin/acteurStructure/ModifierUtilisateur/:id", name: 'ModifierUtilisateur/:id', component: ModifierUtilisateur },

@@ -14,49 +14,29 @@ let element =0;
 
 function ListerActeurStructure() {
   
-    const [ActeurStructure, setActeurStructure] = useState([]);
+    const [podcast, setPodcast] = useState([]);
 
-  useEffect(() => {
-    API.get('acteurStructure').then((res) => {
-      setActeurStructure(res.data.map((item)=>{
-        return  {
-            id: item._id,
-            nom : item.nom,
-            type : item.type,
-            description: item.description,
-            itineraire: item.adresse.itineraire,
-            numerosTelephone: item.contact.numerosTelephone,
-            numerosWhatsapp: item.contact.numerosWhatsapp,
-            email: item.contact.email
-        }
-      }));
-    }).catch((erreur)=> {
-      console.log(erreur);
-  });
-  }, []);
+    useEffect(() => {
+      console.log('USE EFFECT');
+      API.get('podcasts').then((res) => {
+        setPodcast(res.data);
+      }).catch((erreur)=> {
+        console.log(erreur);
+    });
+      
+    }, []);
 
-    function handleClick(e) {     API.get("acteurStructure/"+e).then((res) => {
+    function handleClick(e) {     API.get("podcasts/"+e).then((res) => {
 
       element = res.data.nom;
       console.log(element);
       
       if(window.confirm("voulez-vous vraiment supprimer l'acteur ou structure d'encompagnement " + element)) {
         console.log(element);
-        API.delete("acteurStructure/"+e).then((res)=>{
+        API.delete("podcasts/"+e).then((res)=>{
           toast.success("suppresion effectuer avec succes", toast.POSITION.TOP_RIGHT)
-          API.get('acteurStructure').then((res) => {
-            setActeurStructure(res.data.map((item)=>{
-              return  {
-                  id: item._id,
-                  nom : item.nom,
-                  type : item.type,
-                  description: item.description,
-                  itineraire: item.adresse.itineraire,
-                  numerosTelephone: item.contact.numerosTelephone,
-                  numerosWhatsapp: item.contact.numerosWhatsapp,
-                  email: item.contact.email
-              }
-            }));
+          API.get('podcasts').then((res) => {
+            setPodcast(res.data);
           }).catch((erreur)=> {
             console.log(erreur);
         });
@@ -73,35 +53,30 @@ function ListerActeurStructure() {
 
     const columns = [
       {
-        name: 'Nom',
-        selector: 'nom',
+        name: "Nom de l'emission",
+        selector: 'nomEmission',
+        sortable: true,
+        width : "150px"
+      },
+      {
+        name: 'Lien du Stream',
+        selector: 'streamUrl',
         sortable: true,
         width : "200px"
-      }, 
-      {
-        name: 'Type',
-        selector: 'type',
-        sortable: true,
-        width : "120px"
       },
       {
         name: 'Description',
         selector: 'description',
         sortable: true,
-        width : "120px"
+        width : "200px"
       },
       {
-        name: 'Telephone',
-        selector: 'numerosTelephone',
+        name: 'Durée (minutes)',
+        selector: 'duree',
         sortable: true,
-        width : "120px"
+        width : "200px"
       },
-      {
-        name: 'Itineraire',
-        selector: 'itineraire',
-        sortable: true,
-        width : "145px"
-      },
+
       {
       cell: row => <div>
                     <button type="button" class="btn btn-info"><Link to={ '/admin/acteurStructure/Detail/'+ row.id} style={{textDecoration:"none" , color:"white"}}>Detail</Link></button>{' '}
@@ -115,7 +90,7 @@ function ListerActeurStructure() {
       <div className>
         <DataTable
         columns={columns}
-        data={ActeurStructure}
+        data={podcast}
         pagination={true}
         defaultSortField="label"
         theme="boostrap"

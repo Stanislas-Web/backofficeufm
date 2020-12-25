@@ -25,7 +25,7 @@ const WidgetsIconAdmin = () => {
   }, []);
   return (
     <>
-      <CRow>
+      {/* <CRow>
         <CCol lg="12">
           <CWidgetIcon
             text="Total Suivis"
@@ -127,7 +127,7 @@ const WidgetsIconAdmin = () => {
             <CIcon width={24} name="cil-media-pause" />
           </CWidgetIcon>
         </CCol>
-      </CRow>
+      </CRow> */}
     </>
   );
 };

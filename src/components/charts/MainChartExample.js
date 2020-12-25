@@ -30,14 +30,14 @@ const MainChartExample = (attributes) => {
   useEffect( () => {
     (async function(){
       //Le code de await doit être ici
-      const dataVbg = await API.get("vbg").then((res) =>
+      const dataVbg = await API.get("emissions").then((res) =>
       formatDataForAmChartPie(
-        groupByMonth(formatVbg(res.data), "dateSoumition")
+        groupByMonth(formatVbg(res.data), "nom")
       )
     );
-    const dataCasSoumis = await API.get("cassoumis").then((res) =>
+    const dataCasSoumis = await API.get("podcasts").then((res) =>
     formatDataForAmChartPie(
-      groupByMonth(formatCasSoumis(res.data), "dateSoumition")
+      groupByMonth(formatCasSoumis(res.data), "nomEmission")
     )
   );
   setDataAll({
@@ -55,7 +55,7 @@ const MainChartExample = (attributes) => {
 
     return [
       {
-        label: "VBG",
+        label: "Emissions",
         backgroundColor: hexToRgba(brandInfo, 10),
         borderColor: brandInfo,
         pointHoverBackgroundColor: brandInfo,
@@ -63,7 +63,7 @@ const MainChartExample = (attributes) => {
         data: data1,
       },
       {
-        label: "Cas soumis",
+        label: "Podcasts",
         backgroundColor: "transparent",
         borderColor: brandSuccess,
         pointHoverBackgroundColor: brandSuccess,

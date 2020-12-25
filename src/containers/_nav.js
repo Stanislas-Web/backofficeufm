@@ -119,7 +119,7 @@ const admin_nav = [
     _tag: "CSidebarNavDropdown",
     name: "Emissions",
     to: "/theme/colors",
-    icon: "cil-warning",
+    icon: "cil-list",
     _children: [
       {
         _tag: "CSidebarNavItem",
