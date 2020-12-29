@@ -16,6 +16,8 @@ import ChartBarSimple from "../charts/ChartBarSimple";
 const WidgetsDropdownAdmin = () => {
   const [sumEmissions, setSumEmissions] = useState([]);
   const [sumPodcasts, setSumPodcasts] = useState([]);
+  const [sumbannieres, setSumBannieres] = useState([]);
+
   useEffect(() => {
     api.get("emissions").then((res) => {
       setSumEmissions(res.data);
@@ -23,6 +25,10 @@ const WidgetsDropdownAdmin = () => {
 
     api.get("podcasts").then((res) => {
       setSumPodcasts(res.data);
+    });
+
+    api.get("bannieres").then((res) => {
+      setSumBannieres(res.data);
     });
   }, []);
   // render
@@ -84,7 +90,7 @@ const WidgetsDropdownAdmin = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-primary"
-          header="8"
+          header={sumbannieres.length}
           text="Bannières Publicitaires"
           footerSlot={
             <ChartLineSimple

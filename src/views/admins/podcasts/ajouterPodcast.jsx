@@ -38,7 +38,7 @@ class ModifierActeurStructure extends Component{
     }
    
 uploadImage = ()=>{
-  toast.info("Veuillez patientez pendant que l'audio se télécharge", toast.POSITION.TOP_RIGHT)
+  toast.info("Veuillez patienter", toast.POSITION.TOP_RIGHT)
   this.setState({visibility:true});
   const uploadTask = storage.ref(`images/${this.state.photo.name}`).put(this.state.photo);
   uploadTask.on(

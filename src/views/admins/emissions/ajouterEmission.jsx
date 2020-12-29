@@ -1,6 +1,5 @@
 import React,{Component} from "react";
-import { Form, Button, Col, Row } from 'react-bootstrap';
-import DatePicker from "react-datepicker";
+import { Form, Button, Col, Row, Spinner } from 'react-bootstrap';
 import API from "../../../services/api";
  
 import "react-datepicker/dist/react-datepicker.css";
@@ -27,6 +26,7 @@ class AjouterActeurStructure extends Component{
     errorImageEmission:"",
     errorImageJournaliste:"",
     errorDescription:"",
+    visibility: false
     
 }
 
@@ -71,6 +71,8 @@ handleChange = date => {
 
 
 uploadImage = ()=>{
+  toast.info("Veuillez patienter", toast.POSITION.TOP_RIGHT)
+  this.setState({visibility:true});
   const uploadTask = storage.ref(`images/${this.state.imageEmission.name}`).put(this.state.imageEmission);
   uploadTask.on(
     "state_changed",
@@ -184,120 +186,7 @@ handleSubmit = e => {
   }
 }
 
-
-
-// uploadImage = ()=>{
-//   toast.info("Veuillez patientez pendant que l'audio se télécharge", toast.POSITION.TOP_RIGHT)
-//   const uploadTask = storage.ref(`images/${this.state.imageEmission.name}`).put(this.state.imageEmission);
-//   uploadTask.on(
-//     "state_changed",
-//     snapshot => {},
-//     error => {
-//       console.log(error);
-//     },
-//     ()=>{
-//       storage
-//         .ref("images")
-//         .child(this.state.imageEmission)
-//         .getDownloadURL()
-//         .then(url => {
-//           console.log(url);
-//           this.setState({imageEmission:url})
-//           //upload de l'image du journaliste 
-
-            
-//     if(this.state.nom == "" || this.state.nom == undefined){
-//       this.setState({errorNom:"veuillez saisir le nom de l'émission"})
-//     }
-
-//     if(this.state.type == "" || this.state.type== undefined){
-//       this.setState({errorType:"veuillez saisir le type de l'emission"})
-//     }
-
-//     if(this.state.journaliste == "" || this.state.journaliste == undefined){
-//       this.setState({errorJournaliste:"veuillez saisir le nom du journaliste "})
-//     }
-
-//     if(this.state.imageEmission == "" || this.state.imageEmission == undefined){
-//       this.setState({errorImageEmission:"veuillez selectionner l'image descriptive de l'emission"})
-//     }
-
-//     if(this.state.imageJournaliste == "" || this.state.imageJournaliste == undefined){
-//       this.setState({errorImageJournaliste:"veuillez choisir l'image du journaliste"})
-//     }
-
-//     if(this.state.description == "" || this.state.description == undefined){
-//       this.setState({errorDescription:"veuillez saisir la description de l'emission"})
-//     }
-
-    
-//     const newEmission ={
-//         nom: this.state.nom,
-//         type:this.state.type,
-//         journaliste: this.state.journaliste,
-//         photo:this.state.imageEmission,
-//         photoJournaliste:this.state.imageJournaliste,
-//         description: this.state.description,
-//       }
-
-      
-
-//       console.log(newEmission);
-
-
-
-
-//         });
-//     }
-
-//   )
-// }
-
-// handleSubmit = e => {
-//     e.preventDefault();
-  
-    
-//     if(this.state.nom == "" || this.state.nom == undefined){
-//       this.setState({errorNom:"veuillez saisir le nom de l'émission"})
-//     }
-
-//     if(this.state.type == "" || this.state.type== undefined){
-//       this.setState({errorType:"veuillez saisir le type de l'emission"})
-//     }
-
-//     if(this.state.journaliste == "" || this.state.journaliste == undefined){
-//       this.setState({errorJournaliste:"veuillez saisir le nom du journaliste "})
-//     }
-
-//     if(this.state.imageEmission == "" || this.state.imageEmission == undefined){
-//       this.setState({errorImageEmission:"veuillez selectionner l'image descriptive de l'emission"})
-//     }
-
-//     if(this.state.imageJournaliste == "" || this.state.imageJournaliste == undefined){
-//       this.setState({errorImageJournaliste:"veuillez choisir l'image du journaliste"})
-//     }
-
-//     if(this.state.description == "" || this.state.description == undefined){
-//       this.setState({errorDescription:"veuillez saisir la description de l'emission"})
-//     }
-
-    
-//     const newEmission ={
-//         nom: this.state.nom,
-//         type:this.state.type,
-//         journaliste: this.state.journaliste,
-//         photo:this.state.imageEmission,
-//         photoJournaliste:this.state.imageJournaliste,
-//         description: this.state.description,
-//       }
-
-      
-
-//       console.log(newEmission);
-      
-  
-// }
-
+ 
 
 
   render(){
@@ -306,7 +195,7 @@ handleSubmit = e => {
         
           <h1>Ajouter une Emission</h1>
         <div className="container_form">
-        <Form onSubmit={this.handleSubmit}>
+        {this.state.visibility == false?<Form onSubmit={this.handleSubmit}>
 
 
 
@@ -375,7 +264,9 @@ handleSubmit = e => {
   
     <Button type="submit" variant="primary" className="bouton_form" style={{backgroundColor:"#303C50",}} >Enregistrer</Button>
 </Form>
-        
+:
+              <div style={{padding:"50px 0"}} className="text-center"><Spinner animation="border" variant="primary" /></div>
+          }
         </div>
         </>
     ) 
