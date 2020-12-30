@@ -17,7 +17,7 @@ function ListerActeurStructure() {
     const [podcast, setPodcast] = useState([]);
 
     useEffect(() => {
-      console.log('USE EFFECT');
+    
       API.get('podcasts').then((res) => {
         setPodcast(res.data);
       }).catch((erreur)=> {
@@ -90,7 +90,7 @@ function ListerActeurStructure() {
       <div className>
         <DataTable
         columns={columns}
-        data={podcast}
+        data={this.state.podcast}
         pagination={true}
         defaultSortField="label"
         theme="boostrap"
