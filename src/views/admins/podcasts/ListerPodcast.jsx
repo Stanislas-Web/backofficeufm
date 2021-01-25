@@ -90,7 +90,7 @@ function ListerActeurStructure() {
       <div className>
         <DataTable
         columns={columns}
-        data={this.state.podcast}
+        data={podcast}
         pagination={true}
         defaultSortField="label"
         theme="boostrap"

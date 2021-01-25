@@ -46,31 +46,17 @@ function ListerActeurStructure() {
 
     function handleClick(e) {
       
-      API.get("vbg/"+e).then((res) => {
-
-      element = res.data.type_violence;
+      API.get("emissions/"+e).then((res) => {
+        console.log(res.data);
+      element = res.data.nom;
       console.log(e);
       
-      if(window.confirm("voulez-vous vraiment supprimer le vbg " + element)) {
+      if(window.confirm("voulez-vous vraiment supprimer l' emission " + element)) {
         console.log(element);
-        API.delete("vbg/"+e).then((res)=>{
-          API.get('vbg').then((res) => {
-            res.data.map((item)=>{
-              donnees.push(
-                {
-                  id: item._id,
-                  province : item.province[0].nom,
-                  dateViol : item.date.dateViol,
-                  dateSoumition: item.date.dateSoumition,
-                  type : item.type_violence,
-                  auteurViol : item.auteur_viol,
-                  trancheAgeVictime: item.tranche_age_victime,
-                  sexeVictime : item.sexe_victime
-              }
-              )  
-            });
-            setVBG(donnees);
-            setFiltreVBG(donnees)
+
+        API.delete("emissions/"+e).then((res)=>{
+          API.get('emissions').then((res) => {
+            setEmissions(res.data);
           }).catch((erreur)=> {
             console.log(erreur);
         });
