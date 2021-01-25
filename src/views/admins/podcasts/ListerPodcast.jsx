@@ -26,7 +26,9 @@ function ListerActeurStructure() {
       
     }, []);
 
-    function handleClick(e) {     API.get("podcasts/"+e).then((res) => {
+    function handleClick(e) {     
+      console.log(e);
+      API.get("podcasts/"+e).then((res) => {
 
       element = res.data.nom;
       console.log(element);
@@ -79,7 +81,7 @@ function ListerActeurStructure() {
 
       {
       cell: row => <div>
-                    <button type="button" class="btn btn-info"><Link to={ '/admin/acteurStructure/Detail/'+ row.id} style={{textDecoration:"none" , color:"white"}}>Detail</Link></button>{' '}
+                   
                     <button type="button" class="btn btn-warning"><Link to={ '/admin/acteurStructure/modifierActeurStructure/'+ row.id} style={{textDecoration:"none" , color:"white"}} >Modifier</Link></button>{' '}
                     <button type="button" class="btn btn-danger" onClick={()=> handleClick(row.id)}>Supprimer</button>
                   </div>,

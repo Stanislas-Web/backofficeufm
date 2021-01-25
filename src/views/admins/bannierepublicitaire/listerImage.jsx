@@ -18,7 +18,7 @@ function ListerActeurStructure() {
 
     useEffect(() => {
       console.log('USE EFFECT');
-      API.get('podcasts').then((res) => {
+      API.get('bannieres').then((res) => {
         setPodcast(res.data);
       }).catch((erreur)=> {
         console.log(erreur);
@@ -52,30 +52,19 @@ function ListerActeurStructure() {
     
 
     const columns = [
+     
       {
-        name: "Nom de l'emission",
-        selector: 'nomEmission',
+        name: 'Image',
+        selector: 'urlBannier',
         sortable: true,
-        width : "150px"
-      },
-      {
-        name: 'Lien du Stream',
-        selector: 'streamUrl',
+        width : "300px"
+      },{
+        name: 'Date',
+        selector: 'createdAt',
         sortable: true,
-        width : "200px"
+        width : "300px"
       },
-      {
-        name: 'Description',
-        selector: 'description',
-        sortable: true,
-        width : "200px"
-      },
-      {
-        name: 'Durée (minutes)',
-        selector: 'duree',
-        sortable: true,
-        width : "200px"
-      },
+    
 
       {
       cell: row => <div>

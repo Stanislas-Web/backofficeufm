@@ -14,26 +14,20 @@ toast.configure();
 class ModifierVbg extends Component{
 
     state ={
-        type :"",
-        trancheAge:"",
-        sexe:"",
-        auteur:"",
-        province:"",
-        provinces:[],
-        typeAuteur:[],
-        typeTrancheAge:[],
-        typeViolence:[],
-        provinceUnique:"",
-        errorMessage: '',
-        errorDate:"",
-        errorTypeViolence:"",
-        errorTrancheAge:"",
-        errorSexe:"",
-        errorProvince:"",
-        errorAuteur:"",
-        prov:"",
-        dateViol: new Date("2014/02/08"),
-        dateSoumition:""
+      nom:"",
+      type :"",
+      journaliste:"",
+      imageEmission:"",
+      imageJournaliste:"",
+      description:"",
+      errorNom:"",
+      errorType:"",
+      errorJournaliste:"",
+      errorImageEmission:"",
+      errorImageJournaliste:"",
+      errorDescription:"",
+      visibility: false,
+      emissions: []
     
     }
 
@@ -46,38 +40,13 @@ class ModifierVbg extends Component{
             id:dat
         })
 
-        API.get('vbg/'+dat).then((res)=>{
-            this.setState({
-                type:res.data.type_violence,
-                province: res.data.province[0]._id,
-                trancheAge: res.data.tranche_age_victime,
-                sexe: res.data.sexe_victime,
-                auteur:res.data.auteur_viol,
-                dateViol: new Date(res.data.date.dateViol),
-                dateSoumition: res.data.date.dateSoumition
-            })
-            console.log(this.state.province);
+        API.get('emissions/'+dat).then((res)=>{
+      
+            console.log(res.data);
+            this.setState({emissions : res.data});
         })
         
-       API.get("provinces")
-      .then(res=>{
-          this.setState({provinces : res.data});
-          this.setState({provinceUnique: res.data.map(p=>{
-            if(p._id==this.state.province){
-              this.setState({prov:p})
-            }
-          })})
-          console.log(this.state.prov);
-          
-      })
-
-      API.get("globalvbg")
-      .then(res=>{
-          this.setState({typeAuteur: res.data.auteur_viol}) 
-          this.setState({typeTrancheAge: res.data.tranche_age_victime}) 
-          this.setState({typeViolence: res.data.type_violences}) 
-          console.log(this.state.typeTrancheAge);
-      })
+    
            
     }
    
@@ -167,7 +136,7 @@ handleSubmit = e => {
   render(){
     return(
         <>
-          <h1>Formulaire de modification de l'Emission</h1>
+          <h1>Modifier une Emission</h1>
         <div className="container_form">
         <Form onSubmit={this.handleSubmit}>
 
@@ -176,12 +145,12 @@ handleSubmit = e => {
 <Row>
   <Col>
   <Form.Label>Nom Emission</Form.Label>
-    <Form.Control placeholder="Ex : U Matinale" type="text"onChange={this.changementNom} />
+    <Form.Control placeholder="Ex : U Matinale" type="text"onChange={this.changementNom} value={this.state.emissions.nom} />
     <span>{this.state.errorNom}</span>
   </Col>
   <Col>
   <Form.Label>Type Emission</Form.Label>
-    <Form.Control placeholder="Ex : Culture" type="text"onChange={this.changementNom} />
+    <Form.Control placeholder="Ex : Culture" type="text"onChange={this.changementNom} value={this.state.emissions.type}/>
     <span>{this.state.errorNom}</span>
   </Col>
 
@@ -191,7 +160,7 @@ handleSubmit = e => {
 <Row>
   <Col>
   <Form.Label>Présenté par </Form.Label>
-    <Form.Control placeholder="Ex : Carine MUTAHAlI" type="text"onChange={this.changementNom} />
+    <Form.Control placeholder="Ex : Carine MUTAHAlI" type="text"onChange={this.changementNom} value={this.state.emissions.journaliste} />
     <span>{this.state.errorNom}</span>
   </Col>
 
@@ -217,7 +186,7 @@ handleSubmit = e => {
 <Col>
   <Form.Group controlId="exampleForm.ControlSelect1">
           <Form.Label>Description</Form.Label>
-          <Form.Control as="textarea" onChange={this.changementDescription} >
+          <Form.Control as="textarea" onChange={this.changementDescription} value={this.state.emissions.nom} >
           </Form.Control>
         </Form.Group>
         <span>{this.state.errorDescription}</span>
