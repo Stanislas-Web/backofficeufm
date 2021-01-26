@@ -1,5 +1,5 @@
 import React,{Component} from "react";
-import { Form, Button, Col, Row } from 'react-bootstrap';
+import { Form, Button, Col, Row, Spinner } from 'react-bootstrap';
 import DatePicker from "react-datepicker";
 import API from "../../../services/api";
  
@@ -10,13 +10,15 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {storage} from '../../../config/firebase';
 
+
 toast.configure();
 
 class AjouterActeurStructure extends Component{
   
   state ={
     urlBanniere:"", 
-    errorUrlBanniere:""
+    errorUrlBanniere:"",
+    visibility:false
 }
 
 
@@ -29,6 +31,7 @@ changementUrlBanniere = e =>{
 
 uploadImage = ()=>{
   const uploadTask = storage.ref(`images/${this.state.urlBanniere.name}`).put(this.state.urlBanniere);
+  this.setState({visibility:true});
   uploadTask.on(
     "state_changed",
     snapshot => {},
@@ -96,6 +99,7 @@ handleSubmit = e => {
         
           <h1>Ajouter une Bannière publicitaire </h1>
         <div className="container_form">
+        {this.state.visibility == false?
         <Form onSubmit={this.handleSubmit}>
 
 
@@ -112,6 +116,7 @@ handleSubmit = e => {
           </Col>
        
         </Row>
+    
 
         <br/>
        
@@ -129,7 +134,9 @@ handleSubmit = e => {
   
   
     <Button type="submit" variant="primary" className="bouton_form" style={{backgroundColor:"#303C50",}} >Enregistrer</Button>
-</Form>
+</Form>    :              <div style={{padding:"50px 0"}} className="text-center"><Spinner animation="border" variant="primary" /></div>
+
+}
         
         </div>
         </>
